@@ -1,0 +1,23 @@
+.lmj-plant-item-cover {
+	height: 220px;
+	width: 220px;
+	border-radius: 20px;
+}
+
+.lmj-plant-item {
+	margin: 10px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	text-transform: capitalize;
+}
+.user-item-buttons {
+    margin-top: 10px; /* Espace entre le nom/prénom et les boutons */
+}
+
+.user-item-buttons button {
+    margin-right: 10px; /* Espace entre les boutons */
+    padding: 5px 10px; /* Ajout d'un peu de rembourrage */
+    cursor: pointer; /* Change le curseur en pointeur */
+}
