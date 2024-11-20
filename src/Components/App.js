@@ -7,6 +7,7 @@ import UserUpdate from './UserUpdate.jsx';
 import UserDelete from './UserDelete.jsx';
 import AddUser from './AddUser.jsx';
 import ProfileContainer from './ProfileContainer.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 //<Route path="/user/:id" element={<UserProfile />} /> {/* Page de détails de l'utilisateur */}
 
 function App() {
