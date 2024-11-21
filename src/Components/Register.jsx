@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Style.css';
 import Navbar from './NavBarRegistre';
-function AddUser() {
+function Register() {
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -83,7 +83,7 @@ function AddUser() {
           return response.json();
         })
         .then(data => {
-          setSuccessMessage('Ajouter réussie !');
+          setSuccessMessage('Inscription réussie !');
           setFormData({
             nom: '',
             prenom: '',
@@ -239,11 +239,11 @@ function AddUser() {
         />
       </div>
       
-      <button type="submit">Add</button>
+      <button type="submit">S'inscrire</button>
     </form>
     </div>
 
   );
 }
 
-export default AddUser;
+export default Register;

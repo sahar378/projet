@@ -2,57 +2,69 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function UserUpdate() {
-    const { id } = useParams(); // Récupérer l'ID depuis l'URL
-    console.log("id:" , { id } )
-    const navigate = useNavigate(); // Pour rediriger après la mise à jour
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-    const [profileData, setProfileData] = useState(null); // État pour stocker les données du profil
-    const [loading, setLoading] = useState(true); // État pour gérer le chargement
-    const [error, setError] = useState(null); // État pour gérer les erreurs
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // Récupérer les données de l'utilisateur
     useEffect(() => {
-        fetch(`http://localhost:8080/Utilisateurs?id=${id}`) // Remplacez par votre URL d'API
+        fetch(`http://localhost:8080/users?id=${id}`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la récupération des données'); // Gérer les erreurs de réponse
+                    throw new Error('Erreur lors de la récupération des données');
                 }
-                return response.json(); // Convertir la réponse en JSON
+                return response.json();
             })
             .then((data) => {
-                console.log('Données récupérées:', data); // Log des données récupérées
-                setProfileData(data); // Mettre à jour l'état avec les données récupérées
-                setLoading(false); // Fin du chargement
+                if (data && data.length > 0) {
+                    setProfileData(data[0]); // Assurez-vous que l'utilisateur est non vide
+                } else {
+                    throw new Error('Utilisateur non trouvé');
+                }
+                setLoading(false);
             })
             .catch((error) => {
-                setError(error.message); // Mettre à jour l'état d'erreur
-                setLoading(false); // Fin du chargement même en cas d'erreur
+                setError(error.message);
+                setLoading(false);
             });
-    }, [id]); // Dépendance sur id
+    }, [id]);
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        nom: '',
+        prenom: '',
         email: '',
-        password: '', // Si nécessaire, sinon vous pouvez l'ignorer pour la mise à jour
-        starterDate: '',
-        age: 0,
-        active: false,
+        username: '',
+        password: '',
+        telephone: '',
+        cin: '',
+        dateNaissance: '',
+        dateDebutTravail: '',
+        poste: '',
+        adresseComplet: '',
+        image: null,
     });
 
     useEffect(() => {
         if (profileData) {
             setFormData({
-                firstName: profileData.firstName || '',
-                lastName: profileData.lastName || '',
+                nom: profileData.nom || '',
+                prenom: profileData.prenom || '',
                 email: profileData.email || '',
-                password: '', // Ne pas pré-remplir le mot de passe pour des raisons de sécurité
-                starterDate: profileData.starterDate ? profileData.starterDate.substring(0, 10) : '', // Format YYYY-MM-DD
-                age: profileData.age || 0,
-                active: profileData.active || false,
+                username: profileData.username || '',
+                password: '',
+                telephone: profileData.telephone || '',
+                cin: profileData.cin || '',
+                dateNaissance: profileData.dateNaissance || '',
+                dateDebutTravail: profileData.dateDebutTravail || '',
+                poste: profileData.poste || '',
+                adresseComplet: profileData.adresseComplet || '',
+                image: profileData.image || null,
             });
         }
-    }, [profileData]); // Dépendance sur profileData
+    }, [profileData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -62,84 +74,170 @@ function UserUpdate() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const confirmUpdate = window.confirm("Are you sure you want to edit this user's information ?");
+        const confirmUpdate = window.confirm("Êtes-vous sûr de vouloir modifier ces informations ?");
         
         if (confirmUpdate) {
-            fetch(`http://localhost:8080/Utilisateurs/${id}`, { 
-                method: 'PUT', // Ou 'PATCH' selon votre API
+            fetch(`http://localhost:8080/users/${id}`, { 
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     ...formData,
-                    id  // Inclure l'ID si nécessaire par votre API
+                    id,
                 }),
             })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la mise à jour des données'); 
+                    throw new Error('Erreur lors de la mise à jour des données');
                 }
                 return response.json();
             })
             .then(() => {
                 console.log('Utilisateur mis à jour avec succès');
-                navigate(`/`); // Redirection vers la page de profil de l'utilisateur après la mise à jour
+                navigate(`/`); // Redirection après la mise à jour
             })
             .catch((error) => {
-                setError(error.message); // Mettre à jour l'état d'erreur en cas d'échec de la mise à jour
+                setError(error.message);
             });
         }
     };
 
     if (loading) {
-        return <div>Loading...</div>; // Afficher un message de chargement si loading est true
+        return <div>Chargement...</div>;
     }
 
     if (error) {
-        return <div>{error}</div>; // Afficher un message d'erreur si une erreur est survenue
-    }
-
-    if (!profileData) {
-        return <div>User not found</div>; // Gérer le cas où l'utilisateur n'existe pas
+        return <div>{error}</div>;
     }
 
     return (
         <div>
-            <h2>Update user informations</h2>
+            <h2>Modifier les informations de l'utilisateur</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                FirstName:
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
-                </label>
-                <label>
-                LastName:
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
-                </label>
-                <label>
-                    Email:
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-                </label>
-                <label>
-                Password:
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Laissez vide si inchangé" />
-                </label>
-                <label>
-                StarterDate:
-                    <input type="date" name="starterDate" value={formData.starterDate} onChange={handleChange} required />
-                </label>
-                <label>
-                    Age:
-                    <input type="number" name="age" value={formData.age} onChange={handleChange} required />
-                </label>
-                <label>
-                    Actif:
-                    <input type="checkbox" name="active" checked={formData.active} onChange={(e) => handleChange({ target: { name: 'active', value: e.target.checked } })} />
-                </label>
-                
-                <button type="submit">Update</button>
+                <div>
+                    <label htmlFor="nom">Nom</label>
+                    <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        value={formData.nom}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="prenom">Prénom</label>
+                    <input
+                        type="text"
+                        id="prenom"
+                        name="prenom"
+                        value={formData.prenom}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="username">Nom d'utilisateur</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Mot de passe</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="telephone">Téléphone</label>
+                    <input
+                        type="text"
+                        id="telephone"
+                        name="telephone"
+                        value={formData.telephone}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="cin">CIN</label>
+                    <input
+                        type="text"
+                        id="cin"
+                        name="cin"
+                        value={formData.cin}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="dateNaissance">Date de naissance</label>
+                    <input
+                        type="date"
+                        id="dateNaissance"
+                        name="dateNaissance"
+                        value={formData.dateNaissance}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="dateDebutTravail">Date de début de travail</label>
+                    <input
+                        type="date"
+                        id="dateDebutTravail"
+                        name="dateDebutTravail"
+                        value={formData.dateDebutTravail}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="poste">Poste</label>
+                    <input
+                        type="text"
+                        id="poste"
+                        name="poste"
+                        value={formData.poste}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="adresseComplet">Adresse complète</label>
+                    <input
+                        type="text"
+                        id="adresseComplet"
+                        name="adresseComplet"
+                        value={formData.adresseComplet}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="image">Image</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+                    />
+                </div>
+                <button type="submit">Mettre à jour</button>
             </form>
         </div>
     );
 }
 
-export default UserUpdate; 
+export default UserUpdate;

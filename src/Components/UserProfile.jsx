@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios'; // Importer Axios
+import axios from 'axios';
 
 class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profileData: {}, // État pour stocker les données du profil
-            loading: true, // État pour gérer le chargement
-            error: null // État pour gérer les erreurs
+            profileData: {},
+            loading: true,
+            error: null
         };
     }
 
     componentDidMount() {
-        const { id } = this.props; // Récupérer l'ID depuis les props
-        console.log('id récupérées:', { id }); // Log des données récupérées
+        const { id } = this.props;
 
-        // Remplacez par votre URL d'API
-        axios.get(`http://localhost:8080/Utilisateurs?id=${id}`)
+        axios
+            .get(`http://localhost:8080/users?id=${id}`)
             .then((response) => {
-                console.log('Données récupérées:', response.data); // Log des données récupérées
-                
-                // Filtrer pour trouver l'utilisateur correspondant à l'ID
                 const userData = response.data.find(user => user.id === parseInt(id));
-                console.log('Données utilisateur:', userData); // Log des données utilisateur
 
                 if (userData) {
                     this.setState({ 
@@ -38,8 +33,8 @@ class UserProfile extends Component {
             })
             .catch((error) => {
                 this.setState({ 
-                    error: error.message, // Mettre à jour l'état d'erreur
-                    loading: false // Fin du chargement même en cas d'erreur
+                    error: error.message,
+                    loading: false 
                 });
             });
     }
@@ -48,36 +43,49 @@ class UserProfile extends Component {
         const { profileData, loading, error } = this.state; 
 
         if (loading) {
-            return <div>Chargement...</div>; // Afficher un message de chargement si loading est true
+            return <div>Chargement...</div>;
         }
 
         if (error) {
-            return <div>{error}</div>; // Afficher un message d'erreur si une erreur est survenue
+            return <div>{error}</div>;
         }
 
         const {
-            lastName,
-            firstName,
+            nom,
+            prenom,
             email,
-             password,
-            starterDate,
-            age,
-            active,
-        } = profileData; // Déstructurer profileData
+            username,
+            password,
+            telephone,
+            cin,
+            dateNaissance,
+            dateDebutTravail,
+            poste,
+            adresseComplet,
+            image, // Assume this is a byte array
+        } = profileData;
+
+        // Convert byte array to Base64 string
+        const base64Image = image ? `data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(image)))}` : null;
 
         return (
             <div>
-                <h2>user informations</h2>
-                <p><strong>firstName :</strong> {firstName || 'N/A'}</p> {/* Affichage du prénom */}
-                <p><strong>lastName :</strong> {lastName || 'N/A'}</p> {/* Affichage du nom de famille */}
-                <p><strong>Email :</strong> {email || 'N/A'}</p> {/* Affichage de l'email */}
-                <p><strong>Password :</strong> {password || 'N/A'}</p> {/* Affichage du prénom */}
-                <p><strong>starterDate :</strong> {starterDate ? new Date(starterDate).toLocaleDateString() : 'N/A'}</p> {/* Affichage de la date de début au format local */}
-                <p><strong>Age :</strong> {age !== undefined ? age : 'N/A'}</p> {/* Affichage de l'âge */}
-                <p><strong>Actif :</strong> {active !== undefined ? (active ? 'Oui' : 'Non') : 'N/A'}</p> {/* Affichage si l'utilisateur est actif ou non */}
+                <h2>Informations utilisateur</h2>
+                <p><strong>Nom :</strong> {nom || 'N/A'}</p>
+                <p><strong>Prénom :</strong> {prenom || 'N/A'}</p>
+                <p><strong>Email :</strong> {email || 'N/A'}</p>
+                <p><strong>Nom d'utilisateur :</strong> {username || 'N/A'}</p>
+                <p><strong>Mot de passe :</strong> {password || 'N/A'}</p>
+                <p><strong>Téléphone :</strong> {telephone || 'N/A'}</p>
+                <p><strong>CIN :</strong> {cin || 'N/A'}</p>
+                <p><strong>Date de naissance :</strong> {dateNaissance ? new Date(dateNaissance).toLocaleDateString() : 'N/A'}</p>
+                <p><strong>Date de début de travail :</strong> {dateDebutTravail ? new Date(dateDebutTravail).toLocaleDateString() : 'N/A'}</p>
+                <p><strong>Poste :</strong> {poste || 'N/A'}</p>
+                <p><strong>Adresse complète :</strong> {adresseComplet || 'N/A'}</p>
+                {base64Image && <img src={`data:image/jpeg;base64,${image}`} alt="Profil utilisateur" style={{ width: '100px', height: '100px' }} />}
             </div>
         );
     }
 }
 
-export default UserProfile; // Exportation du composant UserProfile pour pouvoir l'utiliser ailleurs dans l'application
+export default UserProfile;

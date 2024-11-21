@@ -13,7 +13,7 @@ function UserDelete() {
 
     // Récupérer les données de l'utilisateur pour confirmation avant suppression
     useEffect(() => {
-        axios.get(`http://localhost:8080/Utilisateurs?id=${id}`) // Remplacez par votre URL d'API
+        axios.get(`http://localhost:8080/users?id=${id}`) // Remplacez par votre URL d'API
             .then((response) => {
                 console.log('Données récupérées:', response.data); // Log des données récupérées
                 setUserData(response.data);//data[0]} // Mettre à jour l'état avec les données récupérées (supposant que c'est un tableau)
@@ -29,7 +29,7 @@ function UserDelete() {
         const confirmDelete = window.confirm("Are you sure you want to edit this user's information  ?");
         
         if (confirmDelete) {
-            axios.delete(`http://localhost:8080/Utilisateurs/${id}`) // Méthode pour supprimer l'utilisateur
+            axios.delete(`http://localhost:8080/users/${id}`) // Méthode pour supprimer l'utilisateur
                 .then(() => {
                     console.log('Utilisateur supprimé avec succès');
                     navigate('/'); // Redirection vers la liste des utilisateurs après la suppression

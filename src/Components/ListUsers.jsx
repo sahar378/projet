@@ -1,66 +1,64 @@
 import React, { Component } from 'react';
-import axios from 'axios'; // Importer Axios
+import axios from 'axios';
 import UserItem from './UserItem';
 import '../Styles/ListUsers.css';
-import { Link } from 'react-router-dom'; // Importer Link pour la navigation
+import { Link } from 'react-router-dom';
 
 class ListUsers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [], // État pour stocker la liste des utilisateurs
-            loading: true, // État pour gérer le chargement
-            error: null // État pour gérer les erreurs
+            users: [],
+            loading: true,
+            error: null
         };
     }
 
     componentDidMount() {
-        // Remplacez par votre URL d'API
-        axios.get('http://localhost:8080/Utilisateurs') 
+        axios.get('http://localhost:8080/users')
             .then((response) => {
-                console.log('Données récupérées:', response.data); // Log des données récupérées
+                console.log('Données récupérées:', response.data);
                 this.setState({ 
-                    users: response.data, // Mettre à jour l'état avec les données récupérées
-                    loading: false // Fin du chargement
+                    users: response.data,
+                    loading: false
                 });
             })
             .catch((error) => {
                 this.setState({ 
-                    error: error.message, // Mettre à jour l'état d'erreur
-                    loading: false // Fin du chargement même en cas d'erreur
+                    error: error.message,
+                    loading: false
                 });
             });
     }
 
     render() {
-        const { users, loading, error } = this.state; // Déstructurer l'état
+        const { users, loading, error } = this.state;
 
         if (loading) {
-            return <div>Chargement...</div>; // Afficher un message de chargement si loading est true
+            return <div>Chargement...</div>;
         }
 
         if (error) {
-            return <div>{error}</div>; // Afficher un message d'erreur si une erreur est survenue
+            return <div>{error}</div>;
         }
 
         return (
             <div>
                 <h2>Users List</h2>
 
-                {/* Lien vers le composant AddUser */}
                 <Link to="/add">
-                    <button onClick={() => console.log(`Vous allez ajouter un utilisateur:`)}>
+                    <button>
                         Add new user
                     </button>
                 </Link>
                 <ul className='lmj-plant-list'>
-                    {users.map(({ id, image, lastName, firstName }) => (
+                    {users.map(user => (
                         <UserItem
-                            key={id} // Ajoutez une clé unique ici pour chaque élément de la liste
-                            id={id}
-                            image={image}
-                            nom={lastName}  // Assurez-vous que ces propriétés existent dans votre réponse JSON
-                            prenom={firstName}
+                            key={user.id}
+                            id={user.id}
+                            image={user.image}
+                            nom={user.nom}
+                            prenom={user.prenom}
                         />
                     ))}
                 </ul>

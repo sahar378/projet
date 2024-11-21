@@ -8,6 +8,7 @@ import UserDelete from './UserDelete.jsx';
 import AddUser from './AddUser.jsx';
 import ProfileContainer from './ProfileContainer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './Register.jsx';
 //<Route path="/user/:id" element={<UserProfile />} /> {/* Page de détails de l'utilisateur */}
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <h1>Gestion des Utilisateurs</h1>
       <Routes>
         <Route path="/" element={<ListUsers />} /> {/* Page principale avec la liste des utilisateurs */}
-        
+        <Route path="/Register" element={<Register />}/>
         <Route path="/update/:id" element={<UserUpdate />} /> {/* Page d'update de l'utilisateur */}
         <Route path="/delete/:id" element={<UserDelete />} />
         <Route path="/add" element={<AddUser />} /> {/* Route pour ajouter un utilisateur */}
