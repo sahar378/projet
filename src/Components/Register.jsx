@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Style.css';
+import '../Styles/Style.css';
 import Navbar from './NavBarRegistre';
 function Register() {
   const [formData, setFormData] = useState({

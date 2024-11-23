@@ -1,0 +1,73 @@
+/* Navbar.css */
+.navbar {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar .navbar-brand:hover {
+    color: #f1f1f1 !important;
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link {
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #004085;
+    color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .navbar .dropdown-menu {
+    background-color: #0056b3;
+    border-radius: 5px;
+  }
+  
+  .navbar .dropdown-item {
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar .dropdown-item:hover {
+    background-color: #004085;
+  }
+  
+  .navbar .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .navbar .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+  }
+  
+  .navbar img {
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .navbar img:hover {
+    transform: scale(1.1);
+  }
+  

@@ -1,0 +1,51 @@
+/* Sidenav.css */
+.sidenav {
+  height: 100vh;
+  width: 250px;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.sidenav h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidenav .nav-link {
+  color: #ffffff;
+  font-size: 1.1rem;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidenav .nav-link:hover {
+  background-color: #004085;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sidenav .nav-link.active {
+  background-color: #003366;
+}
+
+.sidenav .nav-link:focus {
+  outline: none;
+}
+
+.sidenav .nav-link:active {
+  background-color: #003366;
+  transform: scale(0.98);
+}
+
+.sidenav .nav-link.active:hover {
+  background-color: #003366;
+  color: #ffffff;
+}
