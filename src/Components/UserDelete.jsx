@@ -1,67 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Importer Axios
-import UserProfile from './UserProfile'; // Assurez-vous que le chemin est correct
+import UserService from '../Services/UserService'; 
+import UserProfile from './UserProfile'; 
 
 function UserDelete() {
-    const { id } = useParams(); // Récupérer l'ID depuis l'URL
-    const navigate = useNavigate(); // Pour rediriger après la suppression
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
 
-    const [loading, setLoading] = useState(true); // État pour gérer le chargement
-    const [error, setError] = useState(null); // État pour gérer les erreurs
-    const [userData, setUserData] = useState(null); // État pour stocker les données de l'utilisateur
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
+    const [userData, setUserData] = useState(null); 
 
-    // Récupérer les données de l'utilisateur pour confirmation avant suppression
+    
     useEffect(() => {
-        axios.get(`http://localhost:8080/users?id=${id}`) // Remplacez par votre URL d'API
-            .then((response) => {
-                console.log('Données récupérées:', response.data); // Log des données récupérées
-                setUserData(response.data);//data[0]} // Mettre à jour l'état avec les données récupérées (supposant que c'est un tableau)
-                setLoading(false); // Fin du chargement
+        UserService.getUserById(id) 
+            .then((data) => {
+                console.log('Données récupérées:', data); 
+                setUserData(data); 
+                setLoading(false); 
             })
             .catch((error) => {
-                setError(error.message); // Mettre à jour l'état d'erreur
-                setLoading(false); // Fin du chargement même en cas d'erreur
+                setError(error.message); 
+                setLoading(false); 
             });
-    }, [id]); // Dépendance sur id
+    }, [id]); 
 
     const handleDelete = () => {
-        const confirmDelete = window.confirm("Are you sure you want to edit this user's information  ?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this user?");
         
         if (confirmDelete) {
-            axios.delete(`http://localhost:8080/users/${id}`) // Méthode pour supprimer l'utilisateur
+            UserService.deleteUser(id) 
                 .then(() => {
                     console.log('Utilisateur supprimé avec succès');
-                    navigate('/'); // Redirection vers la liste des utilisateurs après la suppression
+                    navigate('/'); 
                 })
                 .catch((error) => {
-                    setError(error.message); // Mettre à jour l'état d'erreur en cas d'échec de la suppression
+                    setError(error.message); 
                 });
         }
     };
 
     if (loading) {
-        return <div>Chargement...</div>; // Afficher un message de chargement si loading est true
+        return <div>Loading...</div>; 
     }
 
     if (error) {
-        return <div>{error}</div>; // Afficher un message d'erreur si une erreur est survenue
+        return <div>{error}</div>; 
     }
 
     if (!userData) {
-        return <div>Utilisateur non trouvé</div>; // Gérer le cas où l'utilisateur n'existe pas
+        return <div>User not found</div>; 
     }
 
     return (
         <div>
-            <p>Are you sure you want to edit this user's information ?</p>
+            <p>Are you sure you want to delete this user?</p>
             
-            {/* Utilisation du composant UserProfile pour afficher les informations de l'utilisateur */}
-            <UserProfile id={id} /> {/* Passer l'ID à UserProfile */}
+            
+            <UserProfile id={id} />
 
-            <button onClick={handleDelete}>confirm deletion</button>
+            <button onClick={handleDelete}>Confirm the deletion</button>
         </div>
     );
 }
 
-export default UserDelete;
+export default UserDelete; // Exportation du composant UserDelete pour pouvoir l'utiliser ailleurs dans l'application
