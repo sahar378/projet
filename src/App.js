@@ -18,6 +18,9 @@ import Report from './Pages/Report';
 import ProfileManagement from './Components/ProfileManagement';
 import TimeTracking from './Pages/TimeTracking ';
 import Tasks from './Pages/Tasks';
+import UserProfile from './Components/UserProfile';
+import ProfileContainer from './Components/ProfileContainer';
+import UsersList from './Components/UserList';
 
 const App = () => {
   return (
@@ -29,6 +32,8 @@ const App = () => {
             <Route path="/" element={<ListUsers />} />
             <Route path="/register" element={<Register />} />
             <Route path="/update/:id" element={<UserUpdate />} />
+            <Route path="/profile/:id" element={<ProfileContainer />}/>
+            <Route path="/profile "element={<UserProfile/>}/>
             <Route path="/delete/:id" element={<UserDelete />} />
             <Route path="/add" element={<AddUser />} />
             <Route path="/ValidateRegistration" element={<ValidateRegistration />} />
@@ -41,6 +46,7 @@ const App = () => {
             <Route path="/user/:id" element={<ProfileManagement />} />
             <Route path="/user/:id/edit" element={<EditUserProfile />} />
             <Route path="/tasks" element={<Tasks />} />
+            <Route path="/accept" element={<UsersList/>}/>
           </Routes>
         </div>
       </div>

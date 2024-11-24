@@ -7,14 +7,24 @@ const UserService = {
     // Récupérer tous les utilisateurs
     getAllUsers: async () => {
         try {
-            const response = await Axios.get(USER_ENDPOINT);
+            const response = await Axios.get(USER_ENDPOINT);;
             return response.data; // Retourne la liste des utilisateurs
         } catch (error) {
             console.error("Erreur lors de la récupération des utilisateurs:", error);
             throw error; // Relance l'erreur pour la gestion ultérieure
         }
     },
-
+    getAllUsersActive: async () => {
+        try {
+            const response = await Axios.get(USER_ENDPOINT);
+            // Filtrer les utilisateurs pour ne garder que ceux qui sont actifs
+            const activeUsers = response.data.filter(user => user.active);
+            return activeUsers; // Retourne la liste des utilisateurs actifs
+        } catch (error) {
+            console.error("Erreur lors de la récupération des utilisateurs:", error);
+            throw error; // Relance l'erreur pour la gestion ultérieure
+         }
+        },   
 
     // Récupérer un utilisateur par ID
     getUserById: async (id) => {

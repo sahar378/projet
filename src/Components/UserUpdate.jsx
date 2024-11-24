@@ -28,6 +28,7 @@ function UserUpdate() {
                     poste: data.poste || '',
                     adresseComplet: data.adresseComplet || '',
                     active: data.active || false,
+                    Image:null
                 });
                 setLoading(false);
             })
@@ -121,10 +122,10 @@ function UserUpdate() {
                 <label>
                     Active:
                     <input type="checkbox" {...register("active")} />
-                </label>
-
+                </label> 
                 <button type="submit">Update</button>
             </form>
+            
         </div>
     );
 }

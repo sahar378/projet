@@ -10,7 +10,7 @@ function ListUsers() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        UserService.getAllUsers()
+        UserService.getAllUsersActive()
             .then((response) => {
                 console.log('Données récupérées:', response);
                 setUsers(response);

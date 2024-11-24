@@ -51,27 +51,23 @@ function UserProfile() {
         adresseComplet,
         image,
     } = profileData; 
+    const base64Image = image ? `data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(image)))}` : null;
 
     return (
         <div>
-            <h2>User Information</h2>
-            <p><strong>First Name :</strong> {prenom || 'N/A'}</p>
-            <p><strong>Last Name :</strong> {nom || 'N/A'}</p>
+            <h2>Informations utilisateur</h2>
+            <p><strong>Nom :</strong> {nom || 'N/A'}</p>
+            <p><strong>Prénom :</strong> {prenom || 'N/A'}</p>
             <p><strong>Email :</strong> {email || 'N/A'}</p>
-            <p><strong>Username :</strong> {username || 'N/A'}</p>
-            <p><strong>Password :</strong> {password || 'N/A'}</p> 
-            <p><strong>Phone :</strong> {telephone || 'N/A'}</p>
-            <p><strong>ID Card :</strong> {cin || 'N/A'}</p>
-            <p><strong>Birth Date :</strong> {dateNaissance ? new Date(dateNaissance).toLocaleDateString() : 'N/A'}</p>
-            <p><strong>Start Date :</strong> {dateDebutTravail ? new Date(dateDebutTravail).toLocaleDateString() : 'N/A'}</p>
-            <p><strong>Position :</strong> {poste || 'N/A'}</p>
-            <p><strong>Full Address  :</strong> {adresseComplet || 'N/A'}</p>
-            {image && (
-                <div>
-                    <strong>Image :</strong>
-                    <img src={URL.createObjectURL(image)} alt="Profil" style={{ width: 100, height: 100 }} />
-                </div>
-            )}
+            <p><strong>Nom d'utilisateur :</strong> {username || 'N/A'}</p>
+            <p><strong>Mot de passe :</strong> {password || 'N/A'}</p>
+            <p><strong>Téléphone :</strong> {telephone || 'N/A'}</p>
+            <p><strong>CIN :</strong> {cin || 'N/A'}</p>
+            <p><strong>Date de naissance :</strong> {dateNaissance ? new Date(dateNaissance).toLocaleDateString() : 'N/A'}</p>
+            <p><strong>Date de début de travail :</strong> {dateDebutTravail ? new Date(dateDebutTravail).toLocaleDateString() : 'N/A'}</p>
+            <p><strong>Poste :</strong> {poste || 'N/A'}</p>
+            <p><strong>Adresse complète :</strong> {adresseComplet || 'N/A'}</p>
+            {base64Image && <img src={`data:image/jpeg;base64,${image}`} alt="Profil utilisateur" style={{ width: '100px', height: '100px' }} />}
         </div>
     );
 }

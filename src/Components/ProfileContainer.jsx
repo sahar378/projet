@@ -1,5 +1,4 @@
-import { useParams } from 'react-router-dom';
-import ProfileManagement from './ProfileManagement';
+import { useParams } from 'react-router-dom'
 import UserProfile from './UserProfile';
 
 function ProfileContainer() {

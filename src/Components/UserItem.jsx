@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/UserItem.css';
-
+import UserService from '../Services/UserService';
 function UserItem({ id, image, nom, prenom }) {
     return (
         <li key={id} className='lmj-plant-item'>
-            <Link to={`/profile/${id}`}>
+            <Link to={`profile/${id}`}>
                 <img 
                     className='lmj-plant-item-cover' 
                     src={`data:image/jpeg;base64,${image}`} 
