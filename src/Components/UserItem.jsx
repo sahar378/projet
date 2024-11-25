@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/UserItem.css';
-import UserService from '../Services/UserService';
+
 function UserItem({ id, image, nom, prenom }) {
     return (
         <li key={id} className='lmj-plant-item'>
@@ -18,6 +18,7 @@ function UserItem({ id, image, nom, prenom }) {
                     <Link to={`/update/${id}`}>
                         <button>Update</button>
                     </Link>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link to={`/delete/${id}`}>
                         <button>Delete</button>
                     </Link>

@@ -32,7 +32,7 @@ function UserDelete() {
             UserService.deleteUser(id) 
                 .then(() => {
                     console.log('Utilisateur supprimé avec succès');
-                    navigate('/'); 
+                    navigate('/UserManagement'); 
                 })
                 .catch((error) => {
                     setError(error.message); 
@@ -64,4 +64,4 @@ function UserDelete() {
     );
 }
 
-export default UserDelete; // Exportation du composant UserDelete pour pouvoir l'utiliser ailleurs dans l'application
+export default UserDelete; 

@@ -99,7 +99,7 @@ function AddUser() {
             image: null,
           });
           // Redirection vers la page de connexion après un court délai
-          setTimeout(() => navigate('/'), 2000); 
+          setTimeout(() => navigate('/accept'), 2000); 
         })
         .catch(error => {
           setErrorMessage(error.message);

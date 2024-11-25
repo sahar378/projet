@@ -32,8 +32,8 @@ const App = () => {
             <Route path="/" element={<ListUsers />} />
             <Route path="/register" element={<Register />} />
             <Route path="/update/:id" element={<UserUpdate />} />
-            <Route path="/profile/:id" element={<ProfileContainer />}/>
-            <Route path="/profile "element={<UserProfile/>}/>
+            <Route path="UserManagement/profile/:id" element={<ProfileContainer />}/>
+            <Route path="UserManagement/profile "element={<UserProfile/>}/>
             <Route path="/delete/:id" element={<UserDelete />} />
             <Route path="/add" element={<AddUser />} />
             <Route path="/ValidateRegistration" element={<ValidateRegistration />} />

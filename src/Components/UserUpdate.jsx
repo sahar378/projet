@@ -28,7 +28,7 @@ function UserUpdate() {
                     poste: data.poste || '',
                     adresseComplet: data.adresseComplet || '',
                     active: data.active || false,
-                    Image:null
+                    image : data.image 
                 });
                 setLoading(false);
             })
@@ -45,7 +45,7 @@ function UserUpdate() {
             UserService.updateUser(id, data)
                 .then(() => {
                     console.log('User updated successfully');
-                    navigate(`/`);
+                    navigate(`/UserManagement`);
                 })
                 .catch((error) => {
                     setError(error.message);
