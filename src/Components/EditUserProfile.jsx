@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './NavBar';
+
+
 
 const EditUserProfile = () => {
-  const { id } = useParams(); // Get the user ID from the URL
-  const navigate = useNavigate(); // Used to navigate back to the previous page
+
+  const { id } = useParams(); 
+  const navigate = useNavigate(); 
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch the existing user data
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:8080/users/${id}`);
         if (!response.ok) throw new Error('User not found');
         const data = await response.json();
-        setFormData(data); // Initialize the form with user data
+        setFormData(data); 
       } catch (error) {
         setError(error.message);
       } finally {
@@ -27,13 +31,13 @@ const EditUserProfile = () => {
     fetchUser();
   }, [id]);
 
-  // Handle form input change
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submit
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,7 +51,7 @@ const EditUserProfile = () => {
 
       if (!response.ok) throw new Error('Update failed');
       alert('User updated successfully');
-      navigate(`/user/${id}`); // Redirect to profile page
+      navigate(`/user/${id}`);
     } catch (error) {
       setError(error.message);
     }
@@ -57,6 +61,8 @@ const EditUserProfile = () => {
   if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
+    <div>
+      <Navbar/>
     <div className="container mt-5">
       <h2>Edit Profile</h2>
 
@@ -116,6 +122,7 @@ const EditUserProfile = () => {
           Cancel
         </button>
       </form>
+    </div>
     </div>
   );
 };

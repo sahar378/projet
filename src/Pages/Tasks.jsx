@@ -1,5 +1,6 @@
 import React from 'react';
 import SidenavWorker from '../Components/SideNavBarWorker';
+import Navbar from '../Components/NavBar';
 
 function Tasks() {
   const loadingMessageStyle = {
@@ -14,18 +15,26 @@ function Tasks() {
 
   const underDevelopmentStyle = {
     fontSize: '1rem',
-    color: '#6c757d',  // Gray color
+    color: '#6c757d', 
     fontStyle: 'italic',
   };
 
   return (
     <div>
-      <SidenavWorker />
-      <div style={loadingMessageStyle}>
-        <p style={messageStyle}>Loading ...</p>
-        <p style={underDevelopmentStyle}>This page is under development.</p>
+    <Navbar />
+    <div className="d-flex">
+      <div className="flex-grow-3">
+        <SidenavWorker />
+      </div>
+      <div className="flex-grow-1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={loadingMessageStyle}>
+          <p style={messageStyle}>Loading ...</p>
+          <p style={underDevelopmentStyle}>This page is under development.</p>
+        </div>
       </div>
     </div>
+  </div>
+   
   );
 }
 

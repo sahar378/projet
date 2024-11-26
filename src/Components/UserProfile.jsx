@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; 
 import UserService from '../Services/UserService'; 
 
+
 function UserProfile() {
     const { id } = useParams(); 
     const [profileData, setProfileData] = useState({}); 
@@ -69,6 +70,7 @@ function UserProfile() {
             <p><strong>Adresse complète :</strong> {adresseComplet || 'N/A'}</p>
             {base64Image && <img src={`data:image/jpeg;base64,${image}`} alt="Profil utilisateur" style={{ width: '100px', height: '100px' }} />}
         </div>
+       
     );
 }
 

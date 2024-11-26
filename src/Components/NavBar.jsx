@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate, Link } from 'react-router-dom';
 import logo from '../Assets/log.png'; 
 import profile from '../Assets/profile.jpg'; 
 import '../Styles/Navbar.css'
 const Navbar = ({ userId }) => {
-  const handleLogout = () => {
-    console.log("Logout clicked!");
-    // Add your logout logic here
-  };
+  const navigate = useNavigate(); 
 
+  const handleLogout = () => {
+  
+    navigate('/');
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">

@@ -8,7 +8,6 @@ const Navbar = () => {
     <nav style={{ padding: '10px', backgroundColor: '#333', color: '#fff' }}>
       <ul style={{ listStyleType: 'none', padding: 0, display: 'flex' }}>
         <li style={{ marginRight: '20px' }}>
-          <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Lougout</Link>
         </li>
       </ul>
     </nav>

@@ -28,16 +28,16 @@ const UsersList = () => {
 
   const handleAccept = async (userId) => {
     try {
-      // Met à jour le statut actif de l'utilisateur
+
       await axios.put(`http://localhost:8080/users/active/${userId}`, {
         active: true,
       });
 
-      // Envoie un email à l'utilisateur
+    
       await axios.post(`http://localhost:8080/users/${userId}/send-email`);
 
       alert("Utilisateur accepté et email envoyé avec succès.");
-      fetchUsers(); // Recharge la liste des utilisateurs
+      fetchUsers(); 
     } catch (error) {
       console.error("Erreur lors de l'acceptation de l'utilisateur :", error);
 
@@ -55,7 +55,7 @@ const UsersList = () => {
     try {
       updateUserState(userId, { isProcessing: true });
 
-      // Supprime l'utilisateur
+    
       await axios.delete(`http://localhost:8080/users/${userId}`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
 

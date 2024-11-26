@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import UserService from '../Services/UserService'; 
 import UserProfile from './UserProfile'; 
+import Navbar from './NavBar';
+import SidenavAdmin from './SideNavBarAdmin';
 
 function UserDelete() {
     const { id } = useParams(); 
@@ -54,12 +56,22 @@ function UserDelete() {
 
     return (
         <div>
+      <Navbar />
+    <div className="d-flex">
+      <div className="flex-grow-3">
+        <SidenavAdmin />
+      </div>
+      <div className="flex-grow-1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div>
             <p>Are you sure you want to delete this user?</p>
             
             
             <UserProfile id={id} />
 
             <button onClick={handleDelete}>Confirm the deletion</button>
+        </div>
+        </div>
+        </div>
         </div>
     );
 }

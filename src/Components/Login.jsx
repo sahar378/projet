@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Styles/Style.css';
+import Navbar from './NavBarRegistre';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -40,6 +41,7 @@ const Login = () => {
 
     return (
         <div style={{ maxWidth: '400px', margin: 'auto', padding: '20px' }}>
+            <Navbar/>
             <h2>Connexion</h2>
             <form onSubmit={handleLogin}>
                 <div>

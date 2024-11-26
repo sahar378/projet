@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/Style.css';
 import Navbar from './NavBarRegistre';
+
 function Register() {
   const [formData, setFormData] = useState({
     nom: '',
@@ -109,7 +110,7 @@ function Register() {
 
   return (
     <div>
-       <Navbar/>
+     <Navbar/>
     <form onSubmit={handleSubmit}>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}

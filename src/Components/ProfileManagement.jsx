@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '../Styles/ProfileManagement.css';
 
 const ProfileManagement = () => {
+
   const { id } = useParams(); // Get the user ID from the URL
   const navigate = useNavigate(); // Used for navigation to the edit page
   const [user, setUser] = useState(null);

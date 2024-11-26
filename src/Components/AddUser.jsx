@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/Style.css';
-import Navbar from './NavBarRegistre';
+import Navbar from './NavBar';
+import SidenavAdmin from './SideNavBarAdmin';
 function AddUser() {
   const [formData, setFormData] = useState({
     nom: '',
@@ -109,7 +110,12 @@ function AddUser() {
 
   return (
     <div>
-       <Navbar/>
+      <Navbar />
+    <div className="d-flex">
+      <div className="flex-grow-3">
+        <SidenavAdmin />
+      </div>
+      <div className="flex-grow-1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <form onSubmit={handleSubmit}>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}
@@ -242,7 +248,8 @@ function AddUser() {
       <button type="submit">Add</button>
     </form>
     </div>
-
+    </div>
+    </div>
   );
 }
 

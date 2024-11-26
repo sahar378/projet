@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import UserService from '../Services/UserService'; 
+import SidenavAdmin from './SideNavBarAdmin';
+import Navbar from './NavBar';
 
 function UserUpdate() {
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -62,6 +65,14 @@ function UserUpdate() {
     }
 
     return (
+        <div>
+      <Navbar />
+    <div className="d-flex">
+      <div className="flex-grow-3">
+        <SidenavAdmin />
+      </div>
+      <div className="flex-grow-1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div/>
         <div>
             <h2>Update User Information</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -125,7 +136,9 @@ function UserUpdate() {
                 </label> 
                 <button type="submit">Update</button>
             </form>
-            
+            </div>
+            </div>
+            </div>
         </div>
     );
 }

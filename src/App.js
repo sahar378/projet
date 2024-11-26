@@ -18,22 +18,22 @@ import Report from './Pages/Report';
 import ProfileManagement from './Components/ProfileManagement';
 import TimeTracking from './Pages/TimeTracking ';
 import Tasks from './Pages/Tasks';
-import UserProfile from './Components/UserProfile';
 import ProfileContainer from './Components/ProfileContainer';
 import UsersList from './Components/UserList';
+import Login from './Components/Login';
 
 const App = () => {
   return (
    
       <div className="d-flex">
         <div className="flex-grow-1">
-          <Navbar />
+         
           <Routes>
-            <Route path="/" element={<ListUsers />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/listUsers" element={<ListUsers />} />
             <Route path="/register" element={<Register />} />
             <Route path="/update/:id" element={<UserUpdate />} />
             <Route path="UserManagement/profile/:id" element={<ProfileContainer />}/>
-            <Route path="UserManagement/profile "element={<UserProfile/>}/>
             <Route path="/delete/:id" element={<UserDelete />} />
             <Route path="/add" element={<AddUser />} />
             <Route path="/ValidateRegistration" element={<ValidateRegistration />} />

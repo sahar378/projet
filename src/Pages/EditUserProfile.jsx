@@ -14,7 +14,7 @@ const EditUserProfile = () => {
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:8080/users/${id}`);
-        if (!response.ok) throw new Error('Utilisateur non trouvé');
+        if (!response.ok) throw new Error('Not Found User!');
         const data = await response.json();
         setFormData(data);
       } catch (error) {
@@ -43,8 +43,8 @@ const EditUserProfile = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Échec de la mise à jour');
-      alert('Utilisateur mis à jour avec succès');
+      if (!response.ok) throw new Error('Error While Updating!Please try again!');
+      alert('User Profile Updated Successfully!');
       navigate(`/user/${id}`);
     } catch (error) {
       alert(`Erreur: ${error.message}`);
@@ -56,10 +56,10 @@ const EditUserProfile = () => {
 
   return (
     <Container>
-      <h2>Modifier le Profil</h2>
+      <h2>Edit Profile</h2>
       <Form onSubmit={handleSubmit} className="mt-4">
         <Form.Group as={Row} controlId="telephone">
-          <Form.Label column sm={2}>Téléphone</Form.Label>
+          <Form.Label column sm={2}>Phone</Form.Label>
           <Col sm={10}>
             <Form.Control
               type="text"
@@ -71,7 +71,7 @@ const EditUserProfile = () => {
         </Form.Group>
 
         <Form.Group as={Row} controlId="adresseComplet">
-          <Form.Label column sm={2}>Adresse Complète</Form.Label>
+          <Form.Label column sm={2}>Full Adress</Form.Label>
           <Col sm={10}>
             <Form.Control
               type="text"
@@ -83,7 +83,7 @@ const EditUserProfile = () => {
         </Form.Group>
 
         <Form.Group as={Row} controlId="poste">
-          <Form.Label column sm={2}>Poste</Form.Label>
+          <Form.Label column sm={2}>Position</Form.Label>
           <Col sm={10}>
             <Form.Control
               type="text"
@@ -95,7 +95,7 @@ const EditUserProfile = () => {
         </Form.Group>
 
         <Form.Group as={Row} controlId="dateNaissance">
-          <Form.Label column sm={2}>Date de Naissance</Form.Label>
+          <Form.Label column sm={2}>Date of Birth</Form.Label>
           <Col sm={10}>
             <Form.Control
               type="date"
@@ -107,7 +107,7 @@ const EditUserProfile = () => {
         </Form.Group>
 
         <Button variant="primary" type="submit" className="mt-3">
-          Sauvegarder
+          Save
         </Button>
         <Button
           variant="secondary"
@@ -115,7 +115,7 @@ const EditUserProfile = () => {
           className="mt-2 ml-2"
           onClick={() => navigate(`/user/${id}`)}
         >
-          Annuler
+          Cancel
         </Button>
       </Form>
     </Container>
